@@ -5,6 +5,10 @@ import com.example.filedemo.payload.UploadFileResponse;
 import com.example.filedemo.service.FileStorageService;
 
 import java.io.File;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +52,14 @@ public class FileController {
 //        for (Resource r : resources) {
 //            traindata.add(r.getFile());
 //        }
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        Mat src = Imgcodecs.imread("E:\\pictureSecret\\test.png");
+        if (src.empty()) {
+            System.out.println("图片路径不正确");
+
+        }
+
 
         String fileNamedel = fileStorageService.storeFile(file);
 
